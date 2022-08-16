@@ -15,6 +15,11 @@ wget "https://github.com/deepmind/alphafold/archive/refs/tags/v2.2.0.tar.gz" && 
 
 export alphafold_path="$(pwd)/alphafold-2.2.0"
 
+
 wget -q -P "$alphafold_path/alphafold/common/ https://git.scicore.unibas.ch/schwede/openstructure/-/raw/7102c63615b64735c4941278d92b554ec94415f8/modules/mol/alg/src/stereo_chemical_props.txt"
 
+pip install -r "$alphafold_path/requirements.txt"
+
 cd "$CONDA_PREFIX/lib/python3.8/site-packages" && patch -p0 < "$alphafold_path/docker/openmm.patch"
+
+conda env config vars set alphafold_path=${alphafold_path}
