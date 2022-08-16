@@ -22,4 +22,4 @@ pip install -r "$alphafold_path/requirements.txt"
 
 cd "$CONDA_PREFIX/lib/python3.8/site-packages" && patch -p0 < "$alphafold_path/docker/openmm.patch"
 
-conda env config vars set alphafold_path=${alphafold_path}
+conda env config vars set AF_PATH="${alphafold_path}"
