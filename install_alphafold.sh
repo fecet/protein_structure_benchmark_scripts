@@ -1,4 +1,5 @@
 #!/bin/sh
+echo $(which python)
 
 conda install -y -c conda-forge openmm==7.5.1 cudnn==8.2.1.32 cudatoolkit==11.1.1 pdbfixer==1.7
 conda install -y -c bioconda hmmer==3.3.2 hhsuite==3.3.0 kalign2==2.04
