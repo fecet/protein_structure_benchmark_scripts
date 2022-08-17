@@ -1,4 +1,4 @@
-#!/bin/bash -ex
+#!/bin/bash
 # Setup everything for using mmseqs locally
 ARIA_NUM_CONN=8
 WORKDIR="${1:-$(pwd)}"
@@ -16,6 +16,8 @@ if hasCommand wget;   then STRATEGY="$STRATEGY WGET"; fi
 if [ "$STRATEGY" = "" ]; then
 	    fail "No download tool found in PATH. Please install aria2c, curl or wget."
 fi
+
+STRATEGY
 
 downloadFile() {
     URL="$1"
