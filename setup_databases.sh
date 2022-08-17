@@ -17,7 +17,7 @@ if [ "$STRATEGY" = "" ]; then
 	    fail "No download tool found in PATH. Please install aria2c, curl or wget."
 fi
 
-STRATEGY
+echo $STRATEGY
 
 downloadFile() {
     URL="$1"
@@ -26,6 +26,7 @@ downloadFile() {
     for i in $STRATEGY; do
         case "$i" in
         ARIA)
+            echo "trying aria2c"
             FILENAME=$(basename "${OUTPUT}")
             DIR=$(dirname "${OUTPUT}")
             aria2c --max-connection-per-server="$ARIA_NUM_CONN" --allow-overwrite=true -o "$FILENAME" -d "$DIR" "$URL" && set -e && return 0
