@@ -16,10 +16,10 @@ wget "https://github.com/deepmind/alphafold/archive/refs/tags/v2.2.0.tar.gz" && 
 
 ln -sf "$(pwd)/alphafold-2.2.0" "$(pwd)/alphafold"
 
-conda env config vars set ALPHAFOLD_PATH="$(pwd)/alphafold"
-export CURRENT_ENV="$CONDA_PREFIX"
-conda deactivate
-conda activate "$CURRENT_ENV"
+export ALPHAFOLD_PATH="$(pwd)/alphafold"
+# export CURRENT_ENV="$CONDA_PREFIX"
+# conda deactivate
+# conda activate "$CURRENT_ENV"
 
 pip install -r "$ALPHAFOLD_PATH/requirements.txt"
 
@@ -31,3 +31,5 @@ cd "$CONDA_PREFIX/lib/python3.8/site-packages" && patch -p0 < "$ALPHAFOLD_PATH/d
 # bash run_alphafold.sh -d ./data -o ./test -f example.fasta -t 2020-05-14
 
 # pip install "jax[cuda]>=0.3.8,<0.4" -f https://storage.googleapis.com/jax-releases/jax_cuda_releases.html
+
+conda env config vars set ALPHAFOLD_PATH="$(pwd)/alphafold"
