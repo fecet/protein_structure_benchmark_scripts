@@ -134,7 +134,7 @@ fi
 current_working_dir=$(pwd)
 
 # alphafold_script="$current_working_dir/alphafold-2.2.0/run_alphafold.py"
-alphafold_script="$alphafold_path/run_alphafold.py"
+alphafold_script="$ALPHAFOLD_PATH/run_alphafold.py"
 
 if [ ! -f "$alphafold_script" ]; then
     echo "Alphafold python script $alphafold_script does not exist."
