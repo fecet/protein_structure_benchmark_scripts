@@ -12,11 +12,14 @@ conda install -y -c bioconda hmmer==3.3.2 hhsuite==3.3.0 kalign2==2.04
 
 # pip install --upgrade jax==0.2.14 jaxlib==0.1.69+cuda111 -f https://storage.googleapis.com/jax-releases/jax_cuda_releases.html
 
-pip install "jax[cuda]>=0.3.8,<0.4" -f "https://storage.googleapis.com/jax-releases/jax_cuda_releases.html"
-
 wget "https://github.com/deepmind/alphafold/archive/refs/tags/v2.2.0.tar.gz" && tar -xzf v2.2.0.tar.gz
 
-export alphafold_path="$(pwd)/alphafold-2.2.0"
+ln -sf "$(pwd)/alphafold-2.2.0" "$(pwd)/alphafold"
+
+conda env config vars set alphafold_path="$(pwd)/alphafold-2.2.0"
+export CURRENT_ENV="$CONDA_PREFIX"
+conda deactivate
+conda activate "$CURRENT_ENV"
 
 pip install -r "$alphafold_path/requirements.txt"
 
@@ -24,8 +27,7 @@ wget -P "$alphafold_path/alphafold/common/" "https://git.scicore.unibas.ch/schwe
 
 cd "$CONDA_PREFIX/lib/python3.8/site-packages" && patch -p0 < "$alphafold_path/docker/openmm.patch"
 
-conda env config vars set AF_PATH="${alphafold_path}"
 
 # bash run_alphafold.sh -d /data/alphafold_data -o ./test -f example.fasta -t 2020-05-14 -c reduced_dbs
 
-pip install "jax[cuda]>=0.3.8,<0.4" -f https://storage.googleapis.com/jax-releases/jax_cuda_releases.html
+# pip install "jax[cuda]>=0.3.8,<0.4" -f https://storage.googleapis.com/jax-releases/jax_cuda_releases.html
