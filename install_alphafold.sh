@@ -25,3 +25,5 @@ wget -P "$alphafold_path/alphafold/common/" "https://git.scicore.unibas.ch/schwe
 cd "$CONDA_PREFIX/lib/python3.8/site-packages" && patch -p0 < "$alphafold_path/docker/openmm.patch"
 
 conda env config vars set AF_PATH="${alphafold_path}"
+
+# bash run_alphafold.sh -d /data/alphafold_data -o ./test -f example.fasta -t 2020-05-14 -c reduced_dbs
