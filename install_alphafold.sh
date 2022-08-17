@@ -27,3 +27,5 @@ cd "$CONDA_PREFIX/lib/python3.8/site-packages" && patch -p0 < "$alphafold_path/d
 conda env config vars set AF_PATH="${alphafold_path}"
 
 # bash run_alphafold.sh -d /data/alphafold_data -o ./test -f example.fasta -t 2020-05-14 -c reduced_dbs
+
+pip install "jax[cuda]>=0.3.8,<0.4" -f https://storage.googleapis.com/jax-releases/jax_cuda_releases.html
