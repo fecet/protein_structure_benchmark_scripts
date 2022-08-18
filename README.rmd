@@ -1,0 +1,1 @@
+To compile MMseqs2 git, g++ (4.9 or higher) and cmake (2.8.12 or higher) are needed

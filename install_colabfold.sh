@@ -14,4 +14,12 @@ pip install "colabfold[alphafold] @ git+https://github.com/sokrypton/ColabFold"
 
 pip install "jax[cuda]==0.3.13" -f https://storage.googleapis.com/jax-releases/jax_cuda_releases.html
 
+# pip install cmake
+
+sh ./install_mmseqs2.sh
+
+ln -sf $(pwd)/MMseqs2/build/bin/mmseqs $CONDA_PREFIX/bin/mmseqs
+
+./setup_databases.sh
+
 # colabfold_batch <directory_with_fasta_files> <result_dir> 
