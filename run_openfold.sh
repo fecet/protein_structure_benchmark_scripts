@@ -131,15 +131,13 @@ if [[ "$use_precomputed_msas" == "" ]] ; then
 fi
 
 # This bash script looks for the run_alphafold.py script in its current working directory, if it does not exist then exits
-current_working_dir=$(pwd)
-
 # alphafold_script="$current_working_dir/alphafold-2.2.0/run_alphafold.py"
-alphafold_script="$ALPHAFOLD_PATH/run_alphafold.py"
-
-if [ ! -f "$alphafold_script" ]; then
-    echo "Alphafold python script $alphafold_script does not exist."
-    exit 1
-fi
+# alphafold_script="$OPENFOLD_PATH/run_alphafold.py"
+#
+# if [ ! -f "$alphafold_script" ]; then
+#     echo "Alphafold python script $alphafold_script does not exist."
+#     exit 1
+# fi
 
 # Export ENVIRONMENT variables and set CUDA devices for use
 # CUDA GPU control
@@ -157,11 +155,6 @@ if [[ "$openmm_threads" ]] ; then
     export OPENMM_CPU_THREADS=$openmm_threads
 fi
 
-# TensorFlow control
-export TF_FORCE_UNIFIED_MEMORY='1'
-
-# JAX control
-export XLA_PYTHON_CLIENT_MEM_FRACTION='4.0'
 
 # Path and user config (change me if required)
 uniref90_database_path="$data_dir/uniref90/uniref90.fasta"
@@ -200,4 +193,4 @@ else
 fi
 
 # Run AlphaFold with required parameters
-$(python $alphafold_script $binary_paths $database_paths $command_args)
+echo "($alphafold_script $binary_paths $database_paths $command_args)"
