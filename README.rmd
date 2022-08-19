@@ -1,1 +1,73 @@
-To compile MMseqs2 git, g++ (4.9 or higher) and cmake (2.8.12 or higher) are needed
+This repo provides scripts to easily create anaconda environments for using and test different [x]fold AI-based protein prediction program, currently including:
+
+- Alphafold
+- Colabfold
+- Openfold
+- Omegafold
+
+Those scripts are designed to separate [x]fold version and [x]fold environments, you can switch between different versions by changing environments variable in corresponding [x]fold environment, say:
+
+```
+conda env config vars set ALPHAFOLD_PATH="$(pwd)/alphafold" -p $CONDA_PREFIX
+```
+
+## Alphafold
+
+### setup
+
+1. `./download_alphafold_databases.sh $PARH_TO_AF_DB`
+1. `conda create -n alphafold python=3.8`
+2. `conda activate alphafold`
+2. `./install_alphafold.sh`
+
+### run
+
+`bash run_alphafold.sh -d $PATH_TO_AF_DB -o ./test -f example.fasta -t 2020-05-14`
+
+## Colabfold
+
+> Prerequires
+>
+> To compile MMseqs2 git, g++ (4.9 or higher) and cmake (2.8.12 or higher) are needed
+
+### setup
+
+1. `./download_colabfold_databases.sh $PATH_TO_COLABFOLD_DB`
+1. `conda create -n colabfold python=3.8`
+2. `conda activate colabfold`
+2. `./install_colabfold.sh`
+2. `./setup_colabfold_databases.sh $PATH_TO_COLABFOLD_DB`
+
+### run
+
+```
+# This needs a lot of CPU
+colabfold_search input_sequences.fasta /path/to/db_folder msas
+# This needs a GPU
+colabfold_batch msas predictions
+```
+
+## Openfold
+
+
+
+
+## Omegafold
+
+### setup
+
+1. `conda create -n omegafold python=3.8`
+2. `conda activate omegafold`
+
+3. 
+    ```
+    git clone https://github.com/HeliXonProtein/OmegaFold
+    cd OmegaFold
+    pip install .
+    ```
+
+### run
+
+```
+omegafold INPUT_FILE.fasta OUTPUT_DIRECTORY
+```

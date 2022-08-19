@@ -10,9 +10,9 @@ hasCommand () {
 }
 
 STRATEGY=""
-if hasCommand aria2c; then STRATEGY="$STRATEGY ARIA"; fi
-if hasCommand curl;   then STRATEGY="$STRATEGY CURL"; fi
-if hasCommand wget;   then STRATEGY="$STRATEGY WGET"; fi
+if hasCommand curl;   then STRATEGY="CURL"; fi
+if hasCommand wget;   then STRATEGY="WGET"; fi
+if hasCommand aria2c; then STRATEGY="ARIA"; fi
 if [ "$STRATEGY" = "" ]; then
 	    fail "No download tool found in PATH. Please install aria2c, curl or wget."
 fi

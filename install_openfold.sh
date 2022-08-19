@@ -11,10 +11,18 @@ git clone https://github.com/aqlaboratory/openfold.git
 
 export OPENFOLD_PATH="$(pwd)/openfold"
 
-conda env update --file "openfold_env.yml"
+# conda env update --file "openfold_env.yml"
+
+conda install -y -c conda-forge openmm==7.5.1 cudatoolkit==11.3 pdbfixer==1.7 setuptools=59.5.0
+conda install -y -c bioconda hmmer==3.3.2 hhsuite==3.3.0 kalign2==2.04
+conda install -y -c pytorch pytorch=1.12
+
+pip install -r openfold_env.txt
+
+pip install git+https://github.com/NVIDIA/dllogger.git
 
 echo "Attempting to install FlashAttention"
-pip install git+https://github.com/HazyResearch/flash-attention.git@5b838a8bef78186196244a4156ec35bbb58c337d && echo "Installation successful"
+pip install git+https://github.com/HazyResearch/flash-attention.git@5b838a8bef78186196244a4156ec35bbb58c337d || echo "Installation faild"
 
 pushd "$CONDA_PREFIX/lib/python3.8/site-packages/" \
     && patch -p0 < "$OPENFOLD_PATH/lib/openmm.patch" \
@@ -34,4 +42,7 @@ bash "$OPENFOLD_PATH/scripts/download_openfold_params_huggingface.sh" "$OPENFOLD
 # Decompress test data
 gunzip $OPENFOLD_PATH/tests/test_data/sample_feats.pickle.gz
 
-python $OPENFOLD_PATH/setup.py install
+
+# python $OPENFOLD_PATH/setup.py install
+pip install $OPENFOLD_PATH
+conda env config vars set OPENFOLD_PATH="$(pwd)/openfold" -p $CONDA_PREFIX

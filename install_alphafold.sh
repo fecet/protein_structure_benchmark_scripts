@@ -29,8 +29,4 @@ wget -P "$ALPHAFOLD_PATH/alphafold/common/" "https://git.scicore.unibas.ch/schwe
 cd "$CONDA_PREFIX/lib/python3.8/site-packages" && patch -p0 < "$ALPHAFOLD_PATH/docker/openmm.patch"
 
 
-# bash run_alphafold.sh -d ./data -o ./test -f example.fasta -t 2020-05-14
-
-# pip install "jax[cuda]>=0.3.8,<0.4" -f https://storage.googleapis.com/jax-releases/jax_cuda_releases.html
-
 conda env config vars set ALPHAFOLD_PATH="$(pwd)/alphafold" -p $CONDA_PREFIX
