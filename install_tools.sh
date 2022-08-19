@@ -1,1 +1,1 @@
-sudo apt-get install ca-certificates aria2
+sudo apt-get install aria2 awscli wget curl cmake

@@ -22,14 +22,15 @@ echo $STRATEGY
 downloadFile() {
     URL="$1"
     OUTPUT="$2"
-    set +e
+    set -e
     for i in $STRATEGY; do
         case "$i" in
         ARIA)
             echo "trying aria2c"
             FILENAME=$(basename "${OUTPUT}")
             DIR=$(dirname "${OUTPUT}")
-            aria2c --max-connection-per-server="$ARIA_NUM_CONN" --allow-overwrite=true --check-certificate=false -o "$FILENAME" -d "$DIR" "$URL" && set -e && return 0
+            # aria2c --max-connection-per-server="$ARIA_NUM_CONN" --allow-overwrite=true --check-certificate=false -o "$FILENAME" -d "$DIR" "$URL" && set -e && return 0
+            aria2c --max-connection-per-server="$ARIA_NUM_CONN"  --check-certificate=false --continue=true -o "$FILENAME" -d "$DIR" "$URL" && set -e && return 0
             ;;
         CURL)
             curl -L -o -k "$OUTPUT" "$URL" && set -e && return 0

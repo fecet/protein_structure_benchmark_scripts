@@ -9,30 +9,29 @@ which python
 
 git clone https://github.com/aqlaboratory/openfold.git
 
-# ln -sf "$(pwd)/alphafold-2.2.0" "$(pwd)/alphafold"
-
 export OPENFOLD_PATH="$(pwd)/openfold"
 
-conda install -f $OPENFOLD_PATH/environment.yml
+conda env update --file "openfold_env.yml"
 
 echo "Attempting to install FlashAttention"
 pip install git+https://github.com/HazyResearch/flash-attention.git@5b838a8bef78186196244a4156ec35bbb58c337d && echo "Installation successful"
 
-# export CURRENT_ENV="$CONDA_PREFIX"
-# conda deactivate
-# conda activate "$CURRENT_ENV"
+pushd "$CONDA_PREFIX/lib/python3.8/site-packages/" \
+    && patch -p0 < "$OPENFOLD_PATH/lib/openmm.patch" \
+    && popd
 
-pip install -r "$ALPHAFOLD_PATH/requirements.txt"
+wget --no-check-certificate -P "$OPENFOLD_PATH/openfold/resources/" "https://git.scicore.unibas.ch/schwede/openstructure/-/raw/7102c63615b64735c4941278d92b554ec94415f8/modules/mol/alg/src/stereo_chemical_props.txt"
 
-pip install --upgrade jax==0.2.14 jaxlib==0.1.69+cuda111 -f https://storage.googleapis.com/jax-releases/jax_cuda_releases.html
+mkdir -p "$OPENFOLD_PATH/tests/test_data/alphafold/common"
 
-wget -P "$ALPHAFOLD_PATH/alphafold/common/" "https://git.scicore.unibas.ch/schwede/openstructure/-/raw/7102c63615b64735c4941278d92b554ec94415f8/modules/mol/alg/src/stereo_chemical_props.txt"
+ln -rs "$OPENFOLD_PATH/openfold/resources/stereo_chemical_props.txt" "$OPENFOLD_PATH/tests/test_data/alphafold/common"
 
-cd "$CONDA_PREFIX/lib/python3.8/site-packages" && patch -p0 < "$OPENFOLD_PATH/lib/openmm.patch"
+echo "Downloading OpenFold parameters..."
+bash "$OPENFOLD_PATH/scripts/download_openfold_params_huggingface.sh" "$OPENFOLD_PATH/openfold/resources"
 
+# echo "Downloading AlphaFold parameters..."
+# bash "$OPENFOLD_PATH/scripts/download_alphafold_params.sh" "$OPENFOLD_PATH/openfold/resources"
+# Decompress test data
+gunzip $OPENFOLD_PATH/tests/test_data/sample_feats.pickle.gz
 
-# bash run_alphafold.sh -d ./data -o ./test -f example.fasta -t 2020-05-14
-
-# pip install "jax[cuda]>=0.3.8,<0.4" -f https://storage.googleapis.com/jax-releases/jax_cuda_releases.html
-
-conda env config vars set ALPHAFOLD_PATH="$(pwd)/alphafold"
+python $OPENFOLD_PATH/setup.py install
