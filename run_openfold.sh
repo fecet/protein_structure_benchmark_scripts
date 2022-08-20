@@ -124,8 +124,8 @@ database_paths="$database_paths --pdb70_database_path=$pdb70_database_path"
 database_paths="$database_paths --uniclust30_database_path=$uniclust30_database_path --bfd_database_path=$bfd_database_path"
 
 # Run AlphaFold with required parameters
-echo "($fasta_path $data_dir $database_paths $binary_paths  $command_args $output_dir)"
+echo "($fasta_path $data_dir $database_paths $binary_paths  $command_args)"
 
 openfold_script="$OPENFOLD_PATH/run_pretrained_openfold.py"
 
-$(python $openfold_script $binary_paths $database_paths $command_args)
+$(python $openfold_script $fasta_path $template_mmcif_dir $binary_paths $database_paths $command_args)
