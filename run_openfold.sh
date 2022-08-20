@@ -193,4 +193,4 @@ else
 fi
 
 # Run AlphaFold with required parameters
-echo "($alphafold_script $binary_paths $database_paths $command_args)"
+echo "($fasta_path $data_dir $database_paths $binary_paths  $command_args $output_dir)"
