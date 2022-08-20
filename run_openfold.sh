@@ -128,4 +128,4 @@ echo "($fasta_path $data_dir $database_paths $binary_paths  $command_args)"
 
 openfold_script="$OPENFOLD_PATH/run_pretrained_openfold.py"
 
-$(python $openfold_script $fasta_path $template_mmcif_dir $binary_paths $database_paths $command_args)
+$(python $openfold_script $fasta_path $template_mmcif_dir $database_paths $binary_paths $command_args)
