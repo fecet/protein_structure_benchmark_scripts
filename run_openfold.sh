@@ -115,7 +115,7 @@ kalign_binary_path=$(which kalign)
 
 command_args="--output_dir=$output_dir --model_device=$devices --config_preset=$config_preset --openfold_checkpoint_path=$ckpt_path"
 
-database_paths="--uniref90_database_path=$uniref90_database_path --mgnify_database_path=$mgnify_database_path --data_dir=$data_dir --template_mmcif_dir=$template_mmcif_dir --obsolete_pdbs_path=$obsolete_pdbs_path"
+database_paths="--uniref90_database_path=$uniref90_database_path --mgnify_database_path=$mgnify_database_path --obsolete_pdbs_path=$obsolete_pdbs_path"
 
 binary_paths="--hhblits_binary_path=$hhblits_binary_path --hhsearch_binary_path=$hhsearch_binary_path --jackhmmer_binary_path=$jackhmmer_binary_path --kalign_binary_path=$kalign_binary_path"
 
