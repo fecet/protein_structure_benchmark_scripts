@@ -49,6 +49,12 @@ colabfold_batch msas predictions
 
 ## Openfold
 
+> Prerequires
+>
+> To download openfold parameters, `git lfs` is needed:
+> ```sh
+> git lfs install
+>```
 
 
 
