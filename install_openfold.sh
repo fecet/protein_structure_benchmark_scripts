@@ -11,9 +11,6 @@ git clone https://github.com/aqlaboratory/openfold.git
 
 export OPENFOLD_PATH="$(pwd)/openfold"
 
-conda env create -f of-environment.yml
-conda activate openfold
-
 # conda install -y -c conda-forge openmm==7.5.1 cudatoolkit==11.3 pdbfixer==1.7 setuptools=59.5.0
 # conda install -y -c bioconda hmmer==3.3.2 hhsuite==3.3.0 kalign2==2.04
 # conda install -y -c pytorch pytorch=1.12

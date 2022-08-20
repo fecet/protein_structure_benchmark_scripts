@@ -51,11 +51,22 @@ colabfold_batch msas predictions
 
 > Prerequires
 >
-> To download openfold parameters, `git lfs` is needed:
+> To download openfold parameters, `aws` is needed:
 > ```sh
-> git lfs install
+> sudo apt install awscli
 >```
 
+### Setup
+
+1. `conda env create -f of-environment.yml`
+2. `conda activate openfold`
+3. `./install_openfold.sh`
+4. conda deactivate && conda activate openfold
+5. `bash "$OPENFOLD_PATH/scripts/download_alphafold_params.sh" "$OPENFOLD_PATH/openfold/resources"`
+
+### run
+
+`bash run_openafold.sh -d $PATH_TO_AF_DB -o ./test -f example.fasta`
 
 
 ## Omegafold
